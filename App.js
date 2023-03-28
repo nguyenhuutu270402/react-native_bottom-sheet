@@ -1,49 +1,28 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-import BottomSheet, { BottomSheetFlatList, } from '@gorhom/bottom-sheet';
-
+import React, { useState } from 'react';
+import { Button, StyleSheet, Text, View } from 'react-native';
+import CustomBottomSheet from './bottomsheet/CustomBottomSheet';
+import { GestureHandlerRootView, ScrollView } from 'react-native-gesture-handler';
 export default function App() {
+  const [showBottomSheet, SetShowBottomSheet] = useState(false)
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
+    // <Provider>
+    <GestureHandlerRootView style={styles.container}>
       <StatusBar style="auto" />
-      <BottomSheet
-        ref={sheetRef}
-        snapPoints={snapPoints}
-        enablePanDownToClose={true}
-      >
-        <BottomSheetFlatList
-          data={listBinhLuan}
-          keyExtractor={(item) => item.id}
-          renderItem={renderItemBinhLuan}
-          contentContainerStyle={styles.contentContainer}
-        />
-        <View style={styles.boxInput}>
+      <Button
+        onPress={() => SetShowBottomSheet(!showBottomSheet)}
+        title="Show bottom sheet" />
+      <CustomBottomSheet show={showBottomSheet} onDismiss={() => SetShowBottomSheet(false)}>
+        <ScrollView>
+          <Text style={{ height: 2000 }}>
+            skhg
+          </Text>
+        </ScrollView>
+      </CustomBottomSheet>
 
-          {
-            isLoggedIn !== false && nguoidung.avatar !== "" ?
-              <Image
-                source={{ uri: nguoidung.avatar }}
-                style={styles.imageTaiKhoan} />
-              :
-              <View />
-          }
+    </GestureHandlerRootView>
+    // </Provider>
 
-          <TextInput
-            style={styles.textInputBinhLuan}
-            placeholder='Thêm bình luận'
-            cursorColor={'#777'}
-            placeholderTextColor={'#777'}
-            onChangeText={text => setNoiDungBinhLuan(text)}
-            value={noiDungBinhLuan}
-            multiline={true}
-            numberOfLines={4} />
-          <TouchableOpacity style={styles.iconSend} onPress={() => addBinhLuan()}>
-            <MaterialCommunityIcons name="send" size={24} color="green" />
-          </TouchableOpacity>
-        </View>
-      </BottomSheet>
-    </View>
   );
 }
 
