@@ -46,21 +46,21 @@ const CustomBottomSheet = ({ show, onDismiss, children }) => {
         return null;
     }
     return (
-        <Pressable onPress={onDismiss} style={{ backgroundColor: 'rgba(0,0,0,0.5)', width: width, height: height, position: 'absolute' }}>
+        <View onPress={onDismiss} style={{ position: 'absolute' }}>
+            <Pressable onPress={onDismiss} style={{ backgroundColor: 'rgba(0,0,0,0.5)', width: width, height: height, }}>
+            </Pressable>
             <Animated.View style={[styles.root, { height: bottomSheetHeight, bottom: bottomBS }]}>
-                <Pressable>
-                    <PanGestureHandler onGestureEvent={onGesture} onEnded={onGestureEnd}>
-                        <View>
-                            <View style={styles.topHandle}></View>
-                            <Button
-                                onPress={() => onDismiss()}
-                                title="Close bottom sheet" />
-                        </View>
-                    </PanGestureHandler>
-                    {children}
-                </Pressable>
+                <PanGestureHandler onGestureEvent={onGesture} onEnded={onGestureEnd}>
+                    <View>
+                        <View style={styles.topHandle}></View>
+                        <Button
+                            onPress={() => onDismiss()}
+                            title="Close bottom sheet" />
+                        {children}
+                    </View>
+                </PanGestureHandler>
             </Animated.View>
-        </Pressable>
+        </View>
 
     )
 }

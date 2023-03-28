@@ -14,9 +14,8 @@ export default function App() {
         title="Show bottom sheet" />
       <CustomBottomSheet show={showBottomSheet} onDismiss={() => SetShowBottomSheet(false)}>
         <ScrollView>
-          <Text style={{ height: 2000 }}>
-            skhg
-          </Text>
+          <View style={{ height: 2000 }}>
+          </View>
         </ScrollView>
       </CustomBottomSheet>
 
